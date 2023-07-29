@@ -1,0 +1,18 @@
+# python
+.*
+*~
+*.egg-info
+*.log
+*.mo
+*.pyc
+__pycache__/
+
+# django
+/site/
+
+# keep
+!.editorconfig
+!.github
+!.gitignore
+!.flake8
+!.python-version

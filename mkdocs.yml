@@ -1,0 +1,37 @@
+site_name: Django LaunchBox
+site_description: Django LaunchBox is a powerful and convenient package that provides essential tools and utilities for developing Django backends.
+site_author: LaunchAt, Inc.
+site_url: https://launchat.github.io/django-launchbox/
+repo_url: https://github.com/LaunchAt/django-launchbox/
+remote_branch: gh-pages
+dev_addr: 127.0.0.1:8080
+theme:
+  name: material
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+extra_css:
+  - css/extra.css
+plugins:
+  - search
+  - i18n:
+      default_language: en
+      languages:
+        en:
+          name: English
+        ja:
+          name: 日本語

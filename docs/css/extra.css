@@ -1,0 +1,13 @@
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #ed6d34;
+  --md-accent-fg-color: #fa5230;
+  --md-typeset-a-color: #ed6d34;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-hue: 16;
+  --md-primary-fg-color: hsla(var(--md-hue),15%,10%,1);
+  --md-accent-fg-color: #fa5230;
+  --md-typeset-a-color: #ed6d34;
+  --md-default-bg-color: hsla(var(--md-hue),15%,12%,1);
+}
