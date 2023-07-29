@@ -21,12 +21,12 @@ You can install Django LaunchBox using `pip` or some alternative methods:
 pip install git+https://github.com/LaunchAt/django-launchbox.git
 ```
 
-After installing the package, add `'django-launchbox'` to your `INSTALLED_APPS` setting in your Django project's configuration:
+After installing the package, add `'launchbox'` to your `INSTALLED_APPS` setting in your Django project's configuration:
 
 ```python
 INSTALLED_APPS = [
     ...
-    'django-launchbox',
+    'launchbox',
 ]
 ```
 
