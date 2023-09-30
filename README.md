@@ -2,7 +2,7 @@
 
 ## Overview
 
-Django LaunchBox is a powerful and convenient package that provides essential tools and utilities for developing Django backends.
+Django LaunchBox is a tool box provides powerful utilities for backend development.
 
 ## Requirements
 

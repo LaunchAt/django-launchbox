@@ -1,5 +1,5 @@
 site_name: Django LaunchBox
-site_description: Django LaunchBox is a powerful and convenient package that provides essential tools and utilities for developing Django backends.
+site_description: Django LaunchBox is a tool box provides powerful utilities for backend development.
 site_author: LaunchAt, Inc.
 site_url: https://launchat.github.io/django-launchbox/
 repo_url: https://github.com/LaunchAt/django-launchbox/

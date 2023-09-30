@@ -1,33 +1,56 @@
 [tool.poetry]
 name = "launchbox"
 version = "0.0.0"
-description = ""
-authors = []
+description = "Django LaunchBox is a tool box provides powerful utilities for backend development."
+authors = ["LaunchAt Development Team <develop@launchat.jp>"]
+maintainers = ["LaunchAt Development Team <develop@launchat.jp>"]
 readme = "README.md"
 license = "BSD-3-Clause"
-homepage = ""
-repository = ""
-documentation = ""
-keywords = []
-classifiers = []
-packages = []
+homepage = "https://launchat.github.io/django-launchbox"
+repository = "https://github.com/LaunchAt/django-launchbox"
+documentation = "https://launchat.github.io/django-launchbox"
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Framework :: Django",
+    "Framework :: Django :: 3.2",
+    "Framework :: Django :: 4.1",
+    "Framework :: Django :: 4.2",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+packages = [{ include = "launchbox" }]
 include = []
 exclude = []
 
 [tool.poetry.dependencies]
 python = ">=3.8.1"
 django = ">=3.2"
+phonenumbers = "^8.13.21"
+pyotp = "^2.9.0"
+pyjwt = "^2.8.0"
 
 [tool.poetry.group.dev.dependencies]
-mkdocs = "^1.5.0"
-mkdocs-material = "^9.1.19"
-flake8 = "^6.0.0"
+mkdocs = "^1.5.3"
+mkdocs-material = "^9.4.2"
+flake8 = "^6.1.0"
 isort = "^5.12.0"
-black = "^23.7.0"
-mypy = "^1.4.1"
-pytest = "^7.4.0"
-tox = "^4.6.4"
-mkdocs-static-i18n = "^0.56"
+black = "^23.9.1"
+mypy = "^1.5.1"
+pytest = "^7.4.2"
+tox = "^4.11.3"
+mkdocs-static-i18n = "^1.0.6"
+djangorestframework = "^3.14.0"
+markdown = "^3.4.4"
+django-filter = "^23.3"
 
 [build-system]
 requires = ["poetry-core"]
@@ -44,3 +67,6 @@ include_trailing_comma = true
 force_grid_wrap = 0
 use_parentheses = true
 line_length = 88
+
+[tool.mypy]
+ignore_missing_imports = true

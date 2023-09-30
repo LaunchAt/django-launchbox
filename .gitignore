@@ -9,6 +9,7 @@ __pycache__/
 
 # django
 /site/
+db.sqlite3
 
 # keep
 !.editorconfig
