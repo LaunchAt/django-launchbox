@@ -32,11 +32,15 @@ include = []
 exclude = []
 
 [tool.poetry.dependencies]
-python = ">=3.8.1"
+python = ">=3.8.1,<4.0"
 django = ">=3.2"
 phonenumbers = "^8.13.21"
 pyotp = "^2.9.0"
 pyjwt = "^2.8.0"
+watchtower = "^3.0.1"
+boto3 = "^1.28.58"
+django-storages = "^1.14.1"
+django-ses = "^3.5.0"
 
 [tool.poetry.group.dev.dependencies]
 mkdocs = "^1.5.3"
