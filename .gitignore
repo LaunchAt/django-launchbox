@@ -6,6 +6,7 @@
 *.mo
 *.pyc
 __pycache__/
+poetry.lock
 
 # django
 /site/

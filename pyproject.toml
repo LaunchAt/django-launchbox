@@ -32,11 +32,14 @@ include = []
 exclude = []
 
 [tool.poetry.dependencies]
-python = ">=3.8.1"
+python = ">=3.8.1,<4.0"
 django = ">=3.2"
 phonenumbers = "^8.13.21"
 pyotp = "^2.9.0"
 pyjwt = "^2.8.0"
+watchtower = "^3.0.1"
+boto3 = "^1.28.58"
+django-storages = "^1.14.1"
 
 [tool.poetry.group.dev.dependencies]
 mkdocs = "^1.5.3"
@@ -58,8 +61,10 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 skip-string-normalization = true
+extend-exclude = "^.*/migrations/*$"
 
 [tool.isort]
+extend_skip_glob = ["*/migrations/*"]
 skip_gitignore = true
 profile = "black"
 multi_line_output = 3
@@ -70,3 +75,4 @@ line_length = 88
 
 [tool.mypy]
 ignore_missing_imports = true
+exclude = ["^.*/migrations/*$"]
