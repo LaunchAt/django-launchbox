@@ -86,7 +86,7 @@ class SoftDeletableMixin(models.Model):
         null=True,
         blank=True,
         db_index=True,
-        default=True,
+        default=None,
         editable=False,
     )
 
