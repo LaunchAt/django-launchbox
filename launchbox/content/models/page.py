@@ -84,6 +84,13 @@ class Page(UUIDPrimaryKeyMixin, TimeStampedMixin, models.Model):
         verbose_name=_('contents'),
         blank=True,
     )
+    labels = models.ManyToManyField(
+        'content.PageLabel',
+        related_name='pages',
+        through='content.PageLabeling',
+        verbose_name=_('labels'),
+        blank=True,
+    )
 
     class Meta:
         db_table = 'launchbox_page'
@@ -111,7 +118,7 @@ class Page(UUIDPrimaryKeyMixin, TimeStampedMixin, models.Model):
         ]
 
     def __str__(self) -> str:
-        return f'{self.application} / {self.title}'
+        return f'{self.title} / {self.application}'
 
     @property
     def child_page_count(self):
@@ -283,6 +290,9 @@ class PageContentRelation(
             ),
         ]
 
+    def __str__(self) -> str:
+        return f'{self.content} : {self.page}'
+
 
 class PageLabelType(
     SoftDeletableMixin,
@@ -317,7 +327,7 @@ class PageLabelType(
         ordering = ('-created_at',)
 
     def __str__(self) -> str:
-        return self.name
+        return f'{self.name} / {self.application}'
 
 
 class PageLabel(
@@ -352,7 +362,7 @@ class PageLabel(
         ]
 
     def __str__(self) -> str:
-        return self.name
+        return f'{self.name} / {self.type}'
 
 
 class PageLabeling(
@@ -363,11 +373,13 @@ class PageLabeling(
     label = models.ForeignKey(
         PageLabel,
         on_delete=models.CASCADE,
+        related_name='+',
         verbose_name=_('label'),
     )
     page = models.ForeignKey(
         Page,
         on_delete=models.CASCADE,
+        related_name='+',
         verbose_name=_('page'),
     )
 
@@ -382,6 +394,9 @@ class PageLabeling(
                 name='unique_label_per_page',
             ),
         ]
+
+    def __str__(self) -> str:
+        return f'{self.label} : {self.page}'
 
 
 class PageMetaItem(
@@ -412,7 +427,7 @@ class PageMetaItem(
         ordering = ('-created_at',)
 
     def __str__(self) -> str:
-        return self.name
+        return f'{self.name} / {self.page}'
 
 
 class PageAndUserRelationMixin(UUIDPrimaryKeyMixin, TimeStampedMixin, models.Model):

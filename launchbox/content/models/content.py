@@ -33,6 +33,9 @@ class Content(TimeStampedMixin, UUIDPrimaryKeyMixin, models.Model):
         verbose_name_plural = _('contents')
         ordering = ('-created_at',)
 
+    def __str__(self) -> str:
+        return f'{self.body_html[0:30]}' or _('empty page')
+
 
 # class ContentEdit(TimeStampedMixin, UUIDPrimaryKeyMixin, models.Model):
 #     body_html = models.TextField(
