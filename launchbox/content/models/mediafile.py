@@ -14,7 +14,7 @@ class MediaFile(UUIDPrimaryKeyMixin, TimeStampedMixin, models.Model):
     def get_upload_to(self, filename: str):
         timestamp = int(now().timestamp())
         extension = os.path.splitext(filename.lower())[-1]
-        return f'/{self.service.short_id}/{self.short_id}/{timestamp}{extension}'
+        return f'{self.service.short_id}/{self.short_id}/{timestamp}{extension}'
 
     name = models.CharField(_('file name'), max_length=64)
     file = models.FileField(_('file'), upload_to=get_upload_to)
