@@ -37,10 +37,6 @@ class JsonWebTokenQuerySet(models.QuerySet):
         """
         return self.expired_set().delete()
 
-
-class JsonWebTokenManager(
-    models.Manager.from_queryset(JsonWebTokenQuerySet),  # type: ignore
-):
     def get_by_payload(self, payload: dict) -> 'JsonWebToken':
         """Retrieve a token instance using the payload information.
 
@@ -65,6 +61,10 @@ class JsonWebTokenManager(
         payload = decode_token(token)
         return self.get_by_payload(payload)
 
+
+class JsonWebTokenManager(
+    models.Manager.from_queryset(JsonWebTokenQuerySet),  # type: ignore
+):
     def generate(
         self,
         *,
