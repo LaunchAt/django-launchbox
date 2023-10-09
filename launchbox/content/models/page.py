@@ -22,6 +22,12 @@ class Page(UUIDPrimaryKeyMixin, TimeStampedMixin, models.Model):
         verbose_name=_('application'),
     )
     title = models.CharField(_('page title'), max_length=64)
+    description = models.TextField(
+        _('description'),
+        blank=True,
+        null=True,
+        default=None,
+    )
     slug = models.SlugField(_('page slug'), max_length=64, db_index=True)
     is_inherited = models.BooleanField(_('inherited from parent'), default=True)
     published_at = models.DateTimeField(
