@@ -31,7 +31,7 @@ class Application(UUIDPrimaryKeyMixin, TimeStampedMixin, models.Model):
         ordering = ('-created_at',)
 
     def __str__(self) -> str:
-        return f'{self.application} / {self.service}'
+        return f'{self.name} / {self.service}'
 
 
 class ApplicationToken(JsonWebToken):
