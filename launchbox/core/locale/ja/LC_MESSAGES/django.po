@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-08 18:02+0900\n"
+"POT-Creation-Date: 2023-10-10 00:41+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-
-#: launchbox/core/models/mixins.py:44
+#: launchbox/core/models/mixins.py:49
 msgid "uuid primary key"
 msgstr "UUIDプライマリキー"
 
-#: launchbox/core/models/mixins.py:58
+#: launchbox/core/models/mixins.py:67
 msgid "creation date and time"
 msgstr "作成日時"
 
-#: launchbox/core/models/mixins.py:63
+#: launchbox/core/models/mixins.py:73
 msgid "update date and time"
 msgstr "更新日時"
+
+#: launchbox/core/models/mixins.py:85
+msgid "deletion date and time"
+msgstr "削除日時"

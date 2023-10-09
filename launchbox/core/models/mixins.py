@@ -2,6 +2,7 @@ import base64
 import uuid
 
 from django.db import models
+from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
 
@@ -14,7 +15,7 @@ def convert_uuid_to_short_id(uuid: uuid.UUID) -> str:
     Returns:
         str: The Base32 encoded string of the UUID.
     """
-    return base64.b32encode(uuid.bytes).decode('utf-8').rstrip('=')
+    return base64.b32encode(uuid.bytes).decode('utf-8').rstrip('=').lower()
 
 
 def convert_short_id_to_uuid(short_id: str) -> uuid.UUID:
@@ -27,7 +28,7 @@ def convert_short_id_to_uuid(short_id: str) -> uuid.UUID:
         uuid: The UUID from the Base32 encoded short id.
     """
     # Add padding for Base32 decoding
-    padded_short_id = f'{short_id}======'
+    padded_short_id = '{}======'.format(short_id.upper())
     return uuid.UUID(bytes=base64.b32decode(padded_short_id))
 
 
@@ -77,3 +78,33 @@ class TimeStampedMixin(models.Model):
 
     class Meta:
         abstract = True
+
+
+class SoftDeletableMixin(models.Model):
+    deleted_at = models.DateTimeField(
+        _('deletion date and time'),
+        null=True,
+        blank=True,
+        db_index=True,
+        default=True,
+        editable=False,
+    )
+
+    class Meta:
+        abstract = True
+
+    @property
+    def is_deleted(self):
+        return self.deleted_at is not None and self.deleted_at <= now()
+
+    @property
+    def is_active(self):
+        return not self.is_deleted
+
+    def soft_delete(self):
+        self.deleted_at = now()
+        self.save(update_fields=['deleted_at'])
+
+    def revive(self):
+        self.deleted_at = None
+        self.save(update_fields=['deleted_at'])

@@ -40,6 +40,9 @@ pyjwt = "^2.8.0"
 watchtower = "^3.0.1"
 boto3 = "^1.28.58"
 django-storages = "^1.14.1"
+beautifulsoup4 = "^4.12.2"
+django-codemirror2 = "^0.2"
+django-tinymce = "^3.6.1"
 
 [tool.poetry.group.dev.dependencies]
 mkdocs = "^1.5.3"
