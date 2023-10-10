@@ -28,7 +28,15 @@ class Page(UUIDPrimaryKeyMixin, TimeStampedMixin, models.Model):
         null=True,
         default=None,
     )
-    slug = models.SlugField(_('page slug'), max_length=64, db_index=True)
+    slug = models.SlugField(
+        _('page slug'),
+        max_length=64,
+        db_index=True,
+        null=True,
+        blank=True,
+        default=None,
+        unique=True,
+    )
     is_inherited = models.BooleanField(_('inherited from parent'), default=True)
     published_at = models.DateTimeField(
         _('publish date and time'),
@@ -301,7 +309,7 @@ class PageLabelType(
     models.Model,
 ):
     name = models.CharField(_('type name'), max_length=32)
-    slug = models.SlugField(_('type slug'), max_length=32, unique=True)
+    slug = models.SlugField(_('type slug'), max_length=32, db_index=True, unique=True)
     max_per_page = models.PositiveIntegerField(
         _('the numbers of max labelings per page'),
         null=True,
@@ -405,6 +413,7 @@ class PageMetaItem(
     models.Model,
 ):
     name = models.CharField(_('meta name'), max_length=32)
+    key = models.SlugField(_('meta key'), max_length=64, db_index=True, unique=True)
     value_html = models.TextField(_('meta html'), blank=True, null=True, default=None)
     value_json = models.JSONField(_('meta json'), blank=True, null=True, default=None)
     page = models.ForeignKey(
