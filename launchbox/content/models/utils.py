@@ -8,11 +8,16 @@ def html_to_json(html):
 
 def _element_to_json(element):
     if isinstance(element, str):
-        return {'text': element.strip()}
+        if element and element.strip():
+            return {'text': element.strip()}
+        return None
 
     if element.name == '[document]':
         result = []
-        for child in element.children:
+        element_children = list(element.children)
+        if len(element_children) == 1 and isinstance(element_children[0], str):
+            result['text'] = element_children[0].strip()
+        for child in element_children:
             child_json = _element_to_json(child)
             if child_json:
                 result.append(child_json)
@@ -25,10 +30,13 @@ def _element_to_json(element):
     result = {'tag': element.name}
 
     if element.attrs:
-        result['attributes'] = element.attrs
+        result.update(**element.attrs)
 
     children = []
-    for child in element.children:
+    element_children = list(element.children)
+    if len(element_children) == 1 and isinstance(element_children[0], str):
+        result['text'] = element_children[0].strip()
+    for child in element_children:
         child_json = _element_to_json(child)
         if child_json:
             children.append(child_json)
@@ -37,7 +45,6 @@ def _element_to_json(element):
         result['children'] = children
 
     return result
-
 
 def json_to_html(json_data):
     soup = BeautifulSoup('', 'html.parser')
