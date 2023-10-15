@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-30 23:11+0900\n"
+"POT-Creation-Date: 2023-10-15 13:07+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,10 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: launchbox/core/jsonwebtoken/models.py:102
+#: launchbox/core/jsonwebtoken/models.py:99
 msgid "issued date and time"
 msgstr "発行日時"
 
-#: launchbox/core/jsonwebtoken/models.py:103
+#: launchbox/core/jsonwebtoken/models.py:101
 msgid "expiry date and time"
 msgstr "有効期限"

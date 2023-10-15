@@ -5,7 +5,6 @@ from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
 from ..models import UUIDPrimaryKeyMixin
-from .settings import DEFAULT_JWT_EXPIRY_SECONDS
 from .utils import decode_token, encode_token
 
 
@@ -75,22 +74,20 @@ class JsonWebTokenManager(
         parameters.
 
         Args:
-            expiration_seconds (int | None): The number of seconds until the
-                token expires.
+            expiration_seconds (int | None): The number of seconds until
+                the token expires.
             **kwargs: Additional keyword arguments for creating the
                 token.
 
         Returns:
             JsonWebToken: The newly created token instance.
         """
-        expiration_seconds = expiration_seconds or DEFAULT_JWT_EXPIRY_SECONDS
         issued_at = now()
-        expires_at = issued_at + timedelta(seconds=expiration_seconds)
-        return super().create(
-            issued_at=issued_at,
-            expires_at=expires_at,
-            **kwargs,
-        )
+        if expiration_seconds:
+            expires_at = issued_at + timedelta(seconds=expiration_seconds)
+        else:
+            expires_at = None
+        return super().create(issued_at=issued_at, expires_at=expires_at, **kwargs)
 
 
 class JsonWebToken(UUIDPrimaryKeyMixin):
@@ -100,7 +97,12 @@ class JsonWebToken(UUIDPrimaryKeyMixin):
     """
 
     issued_at = models.DateTimeField(_('issued date and time'))
-    expires_at = models.DateTimeField(_('expiry date and time'))
+    expires_at = models.DateTimeField(
+        _('expiry date and time'),
+        null=True,
+        blank=True,
+        default=None,
+    )
 
     objects = JsonWebTokenManager()
 
@@ -114,7 +116,7 @@ class JsonWebToken(UUIDPrimaryKeyMixin):
         Returns:
             bool: True if the token has expired, False otherwise.
         """
-        return self.expires_at < now()
+        return self.expires_at and self.expires_at < now()
 
     @property
     def payload(self) -> dict:

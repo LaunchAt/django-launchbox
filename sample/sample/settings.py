@@ -37,10 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',  # django sites
+    'django.contrib.sitemaps',  # django sitemaps
+    'tinymce',
+    'codemirror2',
     'launchbox.core',
     'launchbox.core.jsonwebtoken',
     'launchbox.core.onetimecode',
     'launchbox.core.phonenumber',
+    'launchbox.content',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +132,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SITE_ID = 1

@@ -46,6 +46,7 @@ def _element_to_json(element):
 
     return result
 
+
 def json_to_html(json_data):
     soup = BeautifulSoup('', 'html.parser')
     element = _json_to_element(json_data, soup)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-10 00:41+0900\n"
+"POT-Creation-Date: 2023-10-15 13:07+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
 #: launchbox/content/models/application.py:12
 msgid "application name"
 msgstr "アプリケーション名"
@@ -34,16 +35,16 @@ msgid "service"
 msgstr "サービス"
 
 #: launchbox/content/models/application.py:24
-#: launchbox/content/models/content.py:27 launchbox/content/models/page.py:72
-#: launchbox/content/models/page.py:304 launchbox/content/models/page.py:333
-#: launchbox/content/models/page.py:399
+#: launchbox/content/models/content.py:27 launchbox/content/models/page.py:86
+#: launchbox/content/models/page.py:328 launchbox/content/models/page.py:357
+#: launchbox/content/models/page.py:429
 msgid "owner"
 msgstr "所有者"
 
 #: launchbox/content/models/application.py:29
 #: launchbox/content/models/application.py:42
 #: launchbox/content/models/application.py:61
-#: launchbox/content/models/page.py:22 launchbox/content/models/page.py:298
+#: launchbox/content/models/page.py:22 launchbox/content/models/page.py:322
 msgid "application"
 msgstr "アプリケーション"
 
@@ -60,7 +61,7 @@ msgid "application tokens"
 msgstr "アプリケーショントークン"
 
 #: launchbox/content/models/application.py:67
-#: launchbox/content/models/page.py:416
+#: launchbox/content/models/page.py:446
 msgid "user"
 msgstr "ユーザー"
 
@@ -80,13 +81,17 @@ msgstr "コンテンツ本文HTML"
 msgid "draft"
 msgstr "下書き"
 
-#: launchbox/content/models/content.py:32 launchbox/content/models/page.py:259
+#: launchbox/content/models/content.py:32 launchbox/content/models/page.py:280
 msgid "content"
 msgstr "コンテンツ"
 
-#: launchbox/content/models/content.py:33 launchbox/content/models/page.py:78
+#: launchbox/content/models/content.py:33 launchbox/content/models/page.py:92
 msgid "contents"
 msgstr "コンテンツ"
+
+#: launchbox/content/models/content.py:37
+msgid "empty page"
+msgstr "空ページ"
 
 #: launchbox/content/models/mediafile.py:19
 msgid "file name"
@@ -112,185 +117,197 @@ msgstr "メディアファイル"
 msgid "page title"
 msgstr "ページタイトル"
 
-#: launchbox/content/models/page.py:25
+#: launchbox/content/models/page.py:26
+msgid "description"
+msgstr "説明文"
+
+#: launchbox/content/models/page.py:32
 msgid "page slug"
 msgstr "ページスラッグ"
 
-#: launchbox/content/models/page.py:26
+#: launchbox/content/models/page.py:40
 msgid "inherited from parent"
 msgstr "親ページから継承"
 
-#: launchbox/content/models/page.py:28
+#: launchbox/content/models/page.py:42
 msgid "publish date and time"
 msgstr "公開日時"
 
-#: launchbox/content/models/page.py:34
+#: launchbox/content/models/page.py:48
 msgid "close date and time"
 msgstr "公開終了日時"
 
-#: launchbox/content/models/page.py:43
+#: launchbox/content/models/page.py:57
 msgid "user who publish"
 msgstr "公開したユーザー"
 
-#: launchbox/content/models/page.py:53
+#: launchbox/content/models/page.py:67
 msgid "user who close"
 msgstr "公開終了したユーザー"
 
-#: launchbox/content/models/page.py:63
+#: launchbox/content/models/page.py:77
 msgid "parent page"
 msgstr "親ページ"
 
-#: launchbox/content/models/page.py:84 launchbox/content/models/page.py:265
-#: launchbox/content/models/page.py:365 launchbox/content/models/page.py:393
-#: launchbox/content/models/page.py:431
+#: launchbox/content/models/page.py:99
+msgid "labels"
+msgstr "ラベル"
+
+#: launchbox/content/models/page.py:105 launchbox/content/models/page.py:286
+#: launchbox/content/models/page.py:391 launchbox/content/models/page.py:423
+#: launchbox/content/models/page.py:461
 msgid "page"
 msgstr "ページ"
 
-#: launchbox/content/models/page.py:85
+#: launchbox/content/models/page.py:106
 msgid "pages"
 msgstr "ページ"
 
-#: launchbox/content/models/page.py:270
+#: launchbox/content/models/page.py:291
 msgid "page content relation"
 msgstr "ページコンテンツ関連"
 
-#: launchbox/content/models/page.py:271
+#: launchbox/content/models/page.py:292
 msgid "page content relations"
 msgstr "ページコンテンツ関連"
 
-#: launchbox/content/models/page.py:287
+#: launchbox/content/models/page.py:311
 msgid "type name"
 msgstr "タイプ名"
 
-#: launchbox/content/models/page.py:288
+#: launchbox/content/models/page.py:312
 msgid "type slug"
 msgstr "タイプスラッグ"
 
-#: launchbox/content/models/page.py:290
+#: launchbox/content/models/page.py:314
 msgid "the numbers of max labelings per page"
 msgstr "ページごと最大ラベリング数"
 
-#: launchbox/content/models/page.py:309
+#: launchbox/content/models/page.py:333
 msgid "page label type"
 msgstr "ページラベルタイプ"
 
-#: launchbox/content/models/page.py:310
+#: launchbox/content/models/page.py:334
 msgid "page label types"
 msgstr "ページラベルタイプ"
 
-#: launchbox/content/models/page.py:323
+#: launchbox/content/models/page.py:347
 msgid "label name"
 msgstr "ラベル名"
 
-#: launchbox/content/models/page.py:327
+#: launchbox/content/models/page.py:351
 msgid "label type"
 msgstr "ラベルタイプ"
 
-#: launchbox/content/models/page.py:338
+#: launchbox/content/models/page.py:362
 msgid "page label"
 msgstr "ページラベル"
 
-#: launchbox/content/models/page.py:339
+#: launchbox/content/models/page.py:363
 msgid "page labels"
 msgstr "ページラベル"
 
-#: launchbox/content/models/page.py:360
+#: launchbox/content/models/page.py:385
 msgid "label"
 msgstr "ラベル"
 
-#: launchbox/content/models/page.py:370
+#: launchbox/content/models/page.py:396
 msgid "page labeling"
 msgstr "ラベリング"
 
-#: launchbox/content/models/page.py:371
+#: launchbox/content/models/page.py:397
 msgid "page labelings"
 msgstr "ラベリング"
 
-#: launchbox/content/models/page.py:386
+#: launchbox/content/models/page.py:415
 msgid "meta name"
 msgstr "メタ名"
 
-#: launchbox/content/models/page.py:387
+#: launchbox/content/models/page.py:416
+msgid "meta key"
+msgstr "メタデータキー"
+
+#: launchbox/content/models/page.py:417
 msgid "meta html"
 msgstr "メタデータ（HTML）"
 
-#: launchbox/content/models/page.py:388
+#: launchbox/content/models/page.py:418
 msgid "meta json"
 msgstr "メタデータ（JSON）"
 
-#: launchbox/content/models/page.py:404
+#: launchbox/content/models/page.py:434
 msgid "page meta item"
 msgstr "ページメタ情報"
 
-#: launchbox/content/models/page.py:405
+#: launchbox/content/models/page.py:435
 msgid "page meta items"
 msgstr "ページメタ情報"
 
-#: launchbox/content/models/page.py:422
+#: launchbox/content/models/page.py:452
 msgid "user identifier"
 msgstr "ユーザー識別子"
 
-#: launchbox/content/models/page.py:457
+#: launchbox/content/models/page.py:487
 msgid "parent"
 msgstr "親ページ"
 
-#: launchbox/content/models/page.py:482
+#: launchbox/content/models/page.py:512
 msgid "page show"
 msgstr "ページ表示"
 
-#: launchbox/content/models/page.py:483
+#: launchbox/content/models/page.py:513
 msgid "page shows"
 msgstr "ページ表示"
 
-#: launchbox/content/models/page.py:488 launchbox/content/models/page.py:498
+#: launchbox/content/models/page.py:518 launchbox/content/models/page.py:528
 msgid "value"
 msgstr "値"
 
-#: launchbox/content/models/page.py:492
+#: launchbox/content/models/page.py:522
 msgid "page view"
 msgstr "ページビュー"
 
-#: launchbox/content/models/page.py:493
+#: launchbox/content/models/page.py:523
 msgid "page views"
 msgstr "ページビュー"
 
-#: launchbox/content/models/page.py:502
+#: launchbox/content/models/page.py:532
 msgid "page like"
 msgstr "ページライク"
 
-#: launchbox/content/models/page.py:503
+#: launchbox/content/models/page.py:533
 msgid "page likes"
 msgstr "ページライク"
 
-#: launchbox/content/models/page.py:510
+#: launchbox/content/models/page.py:540
 msgid "page follow"
 msgstr "ページフォロー"
 
-#: launchbox/content/models/page.py:511
+#: launchbox/content/models/page.py:541
 msgid "page follows"
 msgstr "ページフォロー"
 
-#: launchbox/content/models/page.py:516
+#: launchbox/content/models/page.py:546
 msgid "reaction type"
 msgstr "リアクションタイプ"
 
-#: launchbox/content/models/page.py:518
+#: launchbox/content/models/page.py:548
 msgid "reaction message"
 msgstr "リアクションメッセージ"
 
-#: launchbox/content/models/page.py:524
+#: launchbox/content/models/page.py:554
 msgid "reaction value"
 msgstr "リアクションバリュー"
 
-#: launchbox/content/models/page.py:529
+#: launchbox/content/models/page.py:559
 msgid "reaction meta"
 msgstr "リアクションメタデータ"
 
-#: launchbox/content/models/page.py:533
+#: launchbox/content/models/page.py:563
 msgid "page reaction"
 msgstr "ページリアクション"
 
-#: launchbox/content/models/page.py:534
+#: launchbox/content/models/page.py:564
 msgid "page reactions"
 msgstr "ページメタ情報"
 
