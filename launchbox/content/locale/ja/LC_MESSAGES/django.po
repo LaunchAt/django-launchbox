@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-15 19:04+0900\n"
+"POT-Creation-Date: 2023-10-15 19:10+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,8 +27,8 @@ msgid "application url"
 msgstr "アプリケーション URL"
 
 #: launchbox/content/models/application.py:18
-#: launchbox/content/models/content.py:21
-#: launchbox/content/models/content.py:47
+#: launchbox/content/models/content.py:17
+#: launchbox/content/models/content.py:62
 #: launchbox/content/models/mediafile.py:24
 #: launchbox/content/models/service.py:33
 #: launchbox/content/models/service.py:46
@@ -36,8 +36,8 @@ msgid "service"
 msgstr "サービス"
 
 #: launchbox/content/models/application.py:24
-#: launchbox/content/models/content.py:27
-#: launchbox/content/models/content.py:53 launchbox/content/models/page.py:85
+#: launchbox/content/models/content.py:23
+#: launchbox/content/models/content.py:68 launchbox/content/models/page.py:85
 #: launchbox/content/models/page.py:332 launchbox/content/models/page.py:368
 #: launchbox/content/models/page.py:440
 msgid "owner"
@@ -74,49 +74,56 @@ msgstr "アプリケーション管理者"
 msgid "application admin users"
 msgstr "管理者"
 
-#: launchbox/content/models/content.py:12
-msgid "content body html"
-msgstr "コンテンツ本文HTML"
-
-#: launchbox/content/models/content.py:17
-msgid "draft"
-msgstr "下書き"
-
-#: launchbox/content/models/content.py:32 launchbox/content/models/page.py:284
-msgid "content"
-msgstr "コンテンツ"
-
-#: launchbox/content/models/content.py:33 launchbox/content/models/page.py:91
-msgid "contents"
-msgstr "コンテンツ"
-
-#: launchbox/content/models/content.py:37
-msgid "empty page"
-msgstr "空ページ"
-
-#: launchbox/content/models/content.py:41
+#: launchbox/content/models/content.py:11
 msgid "theme name"
 msgstr "テーマ名"
 
-#: launchbox/content/models/content.py:42
+#: launchbox/content/models/content.py:12
 #, fuzzy
 #| msgid "theme style css"
 msgid "theme css"
 msgstr "テーマCSS"
 
-#: launchbox/content/models/content.py:43
+#: launchbox/content/models/content.py:13
 msgid "theme style sheet url"
 msgstr "テーマスタイルシートURL"
 
-#: launchbox/content/models/content.py:58
+#: launchbox/content/models/content.py:28
 msgid "content theme"
 msgstr "コンテンツのテーマ"
 
-#: launchbox/content/models/content.py:59
-#, fuzzy
-#| msgid "contents"
+#: launchbox/content/models/content.py:29
+
 msgid "content themes"
 msgstr "コンテンツのテーマ"
+
+#: launchbox/content/models/content.py:38
+msgid "content title"
+msgstr "コンテンツのタイトル"
+
+#: launchbox/content/models/content.py:45
+msgid "content body html"
+msgstr "コンテンツ本文HTML"
+
+#: launchbox/content/models/content.py:50
+msgid "draft"
+msgstr "下書き"
+
+#: launchbox/content/models/content.py:54
+msgid "theme"
+msgstr "テーマCSS"
+
+#: launchbox/content/models/content.py:73 launchbox/content/models/page.py:284
+msgid "content"
+msgstr "コンテンツ"
+
+#: launchbox/content/models/content.py:74 launchbox/content/models/page.py:91
+msgid "contents"
+msgstr "コンテンツ"
+
+#: launchbox/content/models/content.py:78
+msgid "empty page"
+msgstr "空ページ"
 
 #: launchbox/content/models/mediafile.py:19
 msgid "file name"
