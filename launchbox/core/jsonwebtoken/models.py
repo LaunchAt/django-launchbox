@@ -126,7 +126,7 @@ class JsonWebToken(UUIDPrimaryKeyMixin):
             dict: The token payload as a dictionary.
         """
         return {
-            'exp': self.expires_at,
+            'exp': self.expires_at or (now() + timedelta(days=365.25*100)),
             'iat': self.issued_at,
             'jti': self.id.hex,
         }
