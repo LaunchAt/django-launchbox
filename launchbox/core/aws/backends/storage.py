@@ -16,9 +16,9 @@ def is_url_valid(url):
 
 
 class AWSS3Storage(S3Boto3Storage):
-    def __init__(self, *, base_url='', location=''):
-        base_url = base_url.replace(r'/?$', '/') if is_url_valid(base_url) else ''
-        parsed_url = urlparse(urljoin(base_url, location.replace(r'^/?', '/')))
+    def __init__(self, *, base_url=''):
+        base_url = base_url if is_url_valid(base_url) else ''
+        parsed_url = urlparse(base_url)
         super().__init__(
             access_key=AWS_S3_CONFIG.get('ACCESS_KEY_ID'),
             secret_key=AWS_S3_CONFIG.get('SECRET_ACCESS_KEY'),
@@ -31,12 +31,12 @@ class AWSS3Storage(S3Boto3Storage):
 
 class BaseAWSS3StaticStorage(AWSS3Storage):
     def __init__(self):
-        super().__init__(base_url=settings.STATIC_URL, location=settings.STATIC_ROOT)
+        super().__init__(base_url=settings.STATIC_URL)
 
 
 class BaseAWSS3MediaStorage(AWSS3Storage):
     def __init__(self):
-        super().__init__(base_url=settings.MEDIA_URL, location=settings.MEDIA_ROOT)
+        super().__init__(base_url=settings.MEDIA_URL)
 
 
 AWSS3StaticStorage = StaticFilesStorage if DEVELOPER_MODE else BaseAWSS3StaticStorage
