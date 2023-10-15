@@ -37,6 +37,32 @@ class Content(TimeStampedMixin, UUIDPrimaryKeyMixin, models.Model):
         return '{}'.format((self.body_html or '')[0:30]) or '{}'.format(_('empty page'))
 
 
+class ContentTheme(TimeStampedMixin, UUIDPrimaryKeyMixin, models.Model):
+    name = models.CharField(_('theme name'), max_length=32)
+    css = models.TextField(_('theme css'), blank=True, null=True, default=None)
+    url = models.URLField(_('theme style sheet url'), null=True, blank=True, default=None)
+    service = models.ForeignKey(
+        Service,
+        on_delete=models.CASCADE,
+        verbose_name=_('service'),
+    )
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name='+',
+        verbose_name=_('owner'),
+    )
+
+    class Meta:
+        db_table = 'launchbox_content_theme'
+        verbose_name = _('content theme')
+        verbose_name_plural = _('content themes')
+        ordering = ('-created_at',)
+
+    def __str__(self) -> str:
+        return self.name
+
+
 # class ContentEdit(TimeStampedMixin, UUIDPrimaryKeyMixin, models.Model):
 #     body_html = models.TextField(
 #         _('content body html'),

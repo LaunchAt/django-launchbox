@@ -1,5 +1,5 @@
 from .application import Application, ApplicationAdminUser, ApplicationToken
-from .content import Content
+from .content import Content, ContentTheme
 from .mediafile import MediaFile
 from .page import (
     Page,
@@ -24,6 +24,7 @@ __all__ = [
     'ApplicationAdminUser',
     'ApplicationToken',
     'Content',
+    'ContentTheme',
     'MediaFile',
     'Page',
     # 'PageAndUserNestableRelationMixin',
