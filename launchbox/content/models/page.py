@@ -35,7 +35,6 @@ class Page(UUIDPrimaryKeyMixin, TimeStampedMixin, models.Model):
         null=True,
         blank=True,
         default=None,
-        unique=True,
     )
     is_inherited = models.BooleanField(_('inherited from parent'), default=True)
     published_at = models.DateTimeField(
@@ -122,6 +121,11 @@ class Page(UUIDPrimaryKeyMixin, TimeStampedMixin, models.Model):
                     | models.Q(closed_at__isnull=True)
                 ),
                 name='published_at_is_before_closed_at',
+            ),
+            # unique slug per applicaiton
+            models.UniqueConstraint(
+                fields=['slug', 'application'],
+                name='unique_page_slug_per_application',
             ),
         ]
 
@@ -309,7 +313,7 @@ class PageLabelType(
     models.Model,
 ):
     name = models.CharField(_('type name'), max_length=32)
-    slug = models.SlugField(_('type slug'), max_length=32, db_index=True, unique=True)
+    slug = models.SlugField(_('type slug'), max_length=32)
     max_per_page = models.PositiveIntegerField(
         _('the numbers of max labelings per page'),
         null=True,
@@ -333,6 +337,13 @@ class PageLabelType(
         verbose_name = _('page label type')
         verbose_name_plural = _('page label types')
         ordering = ('-created_at',)
+        constraints = [
+            # unique slug per applicaiton
+            models.UniqueConstraint(
+                fields=['slug', 'application'],
+                name='unique_pagelabeltype_slug_per_application',
+            ),
+        ]
 
     def __str__(self) -> str:
         return f'{self.name} / {self.application}'
@@ -365,7 +376,7 @@ class PageLabel(
         constraints = [
             models.UniqueConstraint(
                 fields=['type', 'name'],
-                name='unique_name_per_type',
+                name='unique_pagelabel_name_per_type',
             ),
         ]
 
@@ -413,7 +424,7 @@ class PageMetaItem(
     models.Model,
 ):
     name = models.CharField(_('meta name'), max_length=32)
-    key = models.SlugField(_('meta key'), max_length=64, db_index=True, unique=True)
+    key = models.SlugField(_('meta key'), max_length=64)
     value_html = models.TextField(_('meta html'), blank=True, null=True, default=None)
     value_json = models.JSONField(_('meta json'), blank=True, null=True, default=None)
     page = models.ForeignKey(
@@ -434,132 +445,139 @@ class PageMetaItem(
         verbose_name = _('page meta item')
         verbose_name_plural = _('page meta items')
         ordering = ('-created_at',)
+        constraints = [
+            # unique key per page
+            models.UniqueConstraint(
+                fields=['key', 'page'],
+                name='unique_pagemetaitem_key_per_page',
+            ),
+        ]
 
     def __str__(self) -> str:
         return f'{self.name} / {self.page}'
 
 
-class PageAndUserRelationMixin(UUIDPrimaryKeyMixin, TimeStampedMixin, models.Model):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.SET_NULL,
-        verbose_name=_('user'),
-        null=True,
-        blank=True,
-        default=None,
-    )
-    user_identifier = models.CharField(
-        _('user identifier'),
-        max_length=256,
-        null=True,
-        blank=True,
-        default=None,
-    )
-    page = models.ForeignKey(
-        Page,
-        on_delete=models.CASCADE,
-        verbose_name=_('page'),
-    )
+# class PageAndUserRelationMixin(UUIDPrimaryKeyMixin, TimeStampedMixin, models.Model):
+#     user = models.ForeignKey(
+#         settings.AUTH_USER_MODEL,
+#         on_delete=models.SET_NULL,
+#         verbose_name=_('user'),
+#         null=True,
+#         blank=True,
+#         default=None,
+#     )
+#     user_identifier = models.CharField(
+#         _('user identifier'),
+#         max_length=256,
+#         null=True,
+#         blank=True,
+#         default=None,
+#     )
+#     page = models.ForeignKey(
+#         Page,
+#         on_delete=models.CASCADE,
+#         verbose_name=_('page'),
+#     )
 
-    class Meta:
-        abstract = True
-        constraints = [
-            # require user or user identifier
-            models.CheckConstraint(
-                check=(
-                    models.Q(user__isnull=False)
-                    | models.Q(user_identifier__isnull=False)
-                ),
-                name='require_user_or_user_identifier',
-            ),
-        ]
+#     class Meta:
+#         abstract = True
+#         constraints = [
+#             # require user or user identifier
+#             models.CheckConstraint(
+#                 check=(
+#                     models.Q(user__isnull=False)
+#                     | models.Q(user_identifier__isnull=False)
+#                 ),
+#                 name='require_user_or_user_identifier',
+#             ),
+#         ]
 
-    def __str__(self) -> str:
-        identifier = self.user or self.user_identifier
-        return f'{self.page} / {identifier} / {self.created_at}'
-
-
-class PageAndUserNestableRelationMixin(PageAndUserRelationMixin):
-    parent = models.ForeignKey(
-        'self',
-        on_delete=models.SET_NULL,
-        related_name='children',
-        verbose_name=_('parent'),
-        blank=True,
-        null=True,
-        default=None,
-    )
-
-    class Meta:
-        abstract = True
+#     def __str__(self) -> str:
+#         identifier = self.user or self.user_identifier
+#         return f'{self.page} / {identifier} / {self.created_at}'
 
 
-class PageAndUserUniqueRelationMixin(PageAndUserRelationMixin):
-    class Meta(PageAndUserRelationMixin.Meta):
-        abstract = True
-        constraints = [
-            *PageAndUserRelationMixin.Meta.constraints,
-            models.UniqueConstraint(
-                fields=['page', 'user'],
-                name='unique_user_per_page',
-            ),
-        ]
+# class PageAndUserNestableRelationMixin(PageAndUserRelationMixin):
+#     parent = models.ForeignKey(
+#         'self',
+#         on_delete=models.SET_NULL,
+#         related_name='children',
+#         verbose_name=_('parent'),
+#         blank=True,
+#         null=True,
+#         default=None,
+#     )
+
+#     class Meta:
+#         abstract = True
 
 
-class PageShow(PageAndUserRelationMixin):
-    class Meta:
-        db_table = 'launchbox_page_show'
-        verbose_name = _('page show')
-        verbose_name_plural = _('page shows')
-        ordering = ('-created_at',)
+# class PageAndUserUniqueRelationMixin(PageAndUserRelationMixin):
+#     class Meta(PageAndUserRelationMixin.Meta):
+#         abstract = True
+#         constraints = [
+#             *PageAndUserRelationMixin.Meta.constraints,
+#             models.UniqueConstraint(
+#                 fields=['page', 'user'],
+#                 name='unique_user_per_page',
+#             ),
+#         ]
 
 
-class PageView(SoftDeletableMixin, PageAndUserRelationMixin):
-    value = models.IntegerField(_('value'), null=True, blank=True, default=None)
-
-    class Meta:
-        db_table = 'launchbox_page_view'
-        verbose_name = _('page view')
-        verbose_name_plural = _('page views')
-        ordering = ('-created_at',)
+# class PageShow(PageAndUserRelationMixin):
+#     class Meta:
+#         db_table = 'launchbox_page_show'
+#         verbose_name = _('page show')
+#         verbose_name_plural = _('page shows')
+#         ordering = ('-created_at',)
 
 
-class PageLike(SoftDeletableMixin, PageAndUserUniqueRelationMixin):
-    value = models.IntegerField(_('value'), null=True, blank=True, default=None)
+# class PageView(SoftDeletableMixin, PageAndUserRelationMixin):
+#     value = models.IntegerField(_('value'), null=True, blank=True, default=None)
 
-    class Meta:
-        db_table = 'launchbox_page_like'
-        verbose_name = _('page like')
-        verbose_name_plural = _('page likes')
-        ordering = ('-created_at',)
-
-
-class PageFollow(SoftDeletableMixin, PageAndUserUniqueRelationMixin):
-    class Meta:
-        db_table = 'launchbox_page_follow'
-        verbose_name = _('page follow')
-        verbose_name_plural = _('page follows')
-        ordering = ('-created_at',)
+#     class Meta:
+#         db_table = 'launchbox_page_view'
+#         verbose_name = _('page view')
+#         verbose_name_plural = _('page views')
+#         ordering = ('-created_at',)
 
 
-class PageReaction(PageAndUserNestableRelationMixin):
-    type = models.SlugField(_('reaction type'))
-    message = models.TextField(
-        _('reaction message'),
-        null=True,
-        blank=True,
-        default=None,
-    )
-    value = models.IntegerField(
-        _('reaction value'),
-        null=True,
-        blank=True,
-        default=None,
-    )
-    meta = models.JSONField(_('reaction meta'), null=True, blank=True, default=None)
+# class PageLike(SoftDeletableMixin, PageAndUserUniqueRelationMixin):
+#     value = models.IntegerField(_('value'), null=True, blank=True, default=None)
 
-    class Meta:
-        db_table = 'launchbox_page_reaction'
-        verbose_name = _('page reaction')
-        verbose_name_plural = _('page reactions')
-        ordering = ('-created_at',)
+#     class Meta:
+#         db_table = 'launchbox_page_like'
+#         verbose_name = _('page like')
+#         verbose_name_plural = _('page likes')
+#         ordering = ('-created_at',)
+
+
+# class PageFollow(SoftDeletableMixin, PageAndUserUniqueRelationMixin):
+#     class Meta:
+#         db_table = 'launchbox_page_follow'
+#         verbose_name = _('page follow')
+#         verbose_name_plural = _('page follows')
+#         ordering = ('-created_at',)
+
+
+# class PageReaction(PageAndUserNestableRelationMixin):
+#     type = models.SlugField(_('reaction type'))
+#     message = models.TextField(
+#         _('reaction message'),
+#         null=True,
+#         blank=True,
+#         default=None,
+#     )
+#     value = models.IntegerField(
+#         _('reaction value'),
+#         null=True,
+#         blank=True,
+#         default=None,
+#     )
+#     meta = models.JSONField(_('reaction meta'), null=True, blank=True, default=None)
+
+#     class Meta:
+#         db_table = 'launchbox_page_reaction'
+#         verbose_name = _('page reaction')
+#         verbose_name_plural = _('page reactions')
+#         ordering = ('-created_at',)
