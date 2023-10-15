@@ -34,7 +34,7 @@ class Content(TimeStampedMixin, UUIDPrimaryKeyMixin, models.Model):
         ordering = ('-created_at',)
 
     def __str__(self) -> str:
-        return f'{self.body_html[0:30]}' or _('empty page')
+        return '{}'.format((self.body_html or '')[0:30]) or '{}'.format(_('empty page'))
 
 
 # class ContentEdit(TimeStampedMixin, UUIDPrimaryKeyMixin, models.Model):

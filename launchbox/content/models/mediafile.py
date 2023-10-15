@@ -36,7 +36,7 @@ class MediaFile(UUIDPrimaryKeyMixin, TimeStampedMixin, models.Model):
         ordering = ('-created_at',)
 
     def __str__(self):
-        return self.file_url
+        return self.name
 
     @property
     def file_url(self):

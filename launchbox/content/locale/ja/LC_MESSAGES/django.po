@@ -165,11 +165,11 @@ msgstr "ページ"
 
 #: launchbox/content/models/page.py:291
 msgid "page content relation"
-msgstr "ページコンテンツ関連"
+msgstr "ページとコンテンツの紐付け"
 
 #: launchbox/content/models/page.py:292
 msgid "page content relations"
-msgstr "ページコンテンツ関連"
+msgstr "ページとコンテンツの紐付け"
 
 #: launchbox/content/models/page.py:311
 msgid "type name"
@@ -181,7 +181,7 @@ msgstr "タイプスラッグ"
 
 #: launchbox/content/models/page.py:314
 msgid "the numbers of max labelings per page"
-msgstr "ページごと最大ラベリング数"
+msgstr "ページごとの最大ラベル数"
 
 #: launchbox/content/models/page.py:333
 msgid "page label type"
@@ -213,11 +213,11 @@ msgstr "ラベル"
 
 #: launchbox/content/models/page.py:396
 msgid "page labeling"
-msgstr "ラベリング"
+msgstr "ページとラベルの紐付け"
 
 #: launchbox/content/models/page.py:397
 msgid "page labelings"
-msgstr "ラベリング"
+msgstr "ページとラベルの紐付け"
 
 #: launchbox/content/models/page.py:415
 msgid "meta name"
